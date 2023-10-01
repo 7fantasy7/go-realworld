@@ -1,0 +1,10 @@
+GET localhost:8000/organisations/1/features
+
+###
+PUT localhost:8000/organisations/1/features/SOME_KEY/true
+
+###
+GET localhost:8000/organisations/1/features/SOME_KEY/enabled
+
+###
+GET localhost:8000/features/SOME_KEY/organisations
