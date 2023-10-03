@@ -8,16 +8,17 @@ import (
 	"github.com/jackc/pgx/v5"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"strconv"
 )
 
 var (
 	queries *db.Queries
-)
+) // todo global state
 
-func init() {
-	//url := "postgres://postgres:postgres@localhost:5432/feature"
-	url := "postgres://postgres:postgres@host.docker.internal:5432/feature"
+func init() { // todo env var
+	url := "postgres://postgres:postgres@localhost:5432/feature"
+	//url := "postgres://postgres:postgres@host.docker.internal:5432/feature"
 
 	conn, err := pgx.Connect(context.Background(), url)
 	if err != nil {
@@ -47,7 +48,7 @@ func getOrganisationFeatures(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Internal Error", http.StatusInternalServerError)
 	}
-}
+} // todo simplify error handling?
 
 func checkEnabledInOrganisation(w http.ResponseWriter, r *http.Request) {
 	ctx := context.Background()
